@@ -1,3 +1,40 @@
+/* ─── TOP BAR ────────────────────────────────────────────────────────────── */
+.topbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1001;
+  background: var(--yellow);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 7px 24px;
+  font-family: var(--font-display);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--black);
+}
+.topbar__name {
+  font-weight: 900;
+  letter-spacing: 0.12em;
+}
+.topbar__divider {
+  opacity: 0.4;
+}
+.topbar__link {
+  color: var(--black);
+  transition: opacity var(--transition);
+}
+.topbar__link:hover { opacity: 0.65; }
+.topbar__tag {
+  opacity: 0.7;
+}
+
 /* ─── CSS VARIABLES ──────────────────────────────────────────────────────── */
 :root {
   --yellow: #F5C518;
@@ -125,7 +162,7 @@ input, textarea {
 /* ─── NAVIGATION ─────────────────────────────────────────────────────────── */
 .nav {
   position: fixed;
-  top: 0;
+  top: 33px;
   left: 0;
   right: 0;
   z-index: 1000;
@@ -221,7 +258,7 @@ input, textarea {
   display: flex;
   align-items: center;
   overflow: hidden;
-  padding: 120px 24px 80px;
+  padding: 155px 24px 80px;
 }
 .hero__bg {
   position: absolute;
@@ -674,6 +711,17 @@ input, textarea {
   border: 1px solid rgba(245, 197, 24, 0.2);
   border-radius: 6px;
 }
+.form__success a { color: var(--yellow); text-decoration: underline; }
+.form__error {
+  font-size: 0.88rem;
+  color: #ff6b6b;
+  text-align: center;
+  padding: 12px;
+  background: rgba(255, 107, 107, 0.08);
+  border: 1px solid rgba(255, 107, 107, 0.2);
+  border-radius: 6px;
+}
+.form__error a { color: #ff6b6b; text-decoration: underline; }
 
 /* ─── FOOTER ─────────────────────────────────────────────────────────────── */
 .footer {
@@ -793,6 +841,12 @@ input, textarea {
 }
 
 @media (max-width: 768px) {
+  .topbar__link,
+  .topbar__tag,
+  .topbar__divider { display: none; }
+  .topbar__name { font-size: 0.72rem; }
+  .nav { top: 30px; }
+
   .nav__links {
     display: none;
     position: fixed;
