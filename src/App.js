@@ -73,7 +73,17 @@ function Nav({ activeSection, onNav }) {
   };
 
   return (
-    <nav className={`nav${scrolled ? ' nav--scrolled' : ''}`}>
+    <>
+      <div className="topbar">
+        <span className="topbar__name">WEST GA EQUIPMENT SOLUTIONS</span>
+        <span className="topbar__divider">|</span>
+        <a href="tel:6789954632" className="topbar__link">(678) 995-4632</a>
+        <span className="topbar__divider">|</span>
+        <a href="mailto:getstarted@westgaes.com" className="topbar__link">getstarted@westgaes.com</a>
+        <span className="topbar__divider">|</span>
+        <span className="topbar__tag">24/7 Emergency Service</span>
+      </div>
+      <nav className={`nav${scrolled ? ' nav--scrolled' : ''}`}>
       <div className="nav__inner">
         <button className="nav__logo" onClick={() => handleNav('home')}>
           <img src="/logo-full.png" alt="West GA Equipment Solutions" />
@@ -102,6 +112,7 @@ function Nav({ activeSection, onNav }) {
         </button>
       </div>
     </nav>
+    </>
   );
 }
 
@@ -282,22 +293,35 @@ function ContactSection() {
 
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setStatus('sending');
-    // Build mailto link as fallback (no backend needed for static site)
-    const subject = encodeURIComponent(`Service Request from ${form.firstName} ${form.lastName}`);
-    const body = encodeURIComponent(
-      `Name: ${form.firstName} ${form.lastName}\n` +
-      `Company: ${form.company}\n` +
-      `Phone: ${form.phone}\n` +
-      `Email: ${form.email}\n` +
-      `Machine: ${form.machine}\n` +
-      `Requested Date: ${form.serviceDate}\n\n` +
-      `Message:\n${form.message}`
-    );
-    window.location.href = `mailto:getstarted@westgaes.com?subject=${subject}&body=${body}`;
-    setTimeout(() => setStatus('sent'), 1000);
+    try {
+      const res = await fetch('https://formspree.io/f/mnjrkjqk', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+          name: `${form.firstName} ${form.lastName}`,
+          firstName: form.firstName,
+          lastName: form.lastName,
+          company: form.company,
+          phone: form.phone,
+          email: form.email,
+          machine: form.machine,
+          serviceDate: form.serviceDate,
+          message: form.message,
+          _subject: `Service Request from ${form.firstName} ${form.lastName} — West Georgia Equipment Solutions`,
+        }),
+      });
+      if (res.ok) {
+        setStatus('sent');
+        setForm({ firstName: '', lastName: '', company: '', phone: '', email: '', machine: '', message: '', serviceDate: '' });
+      } else {
+        setStatus('error');
+      }
+    } catch {
+      setStatus('error');
+    }
   };
 
   return (
@@ -386,11 +410,14 @@ function ContactSection() {
               <label>Describe the Issue *</label>
               <textarea name="message" value={form.message} onChange={handleChange} required rows={4} placeholder="Describe the problem, symptoms, or service needed..." />
             </div>
-            <button type="submit" className={`btn btn--primary btn--full${status === 'sending' ? ' btn--loading' : ''}`} disabled={status === 'sending'}>
-              {status === 'sent' ? '✓ Message Sent!' : status === 'sending' ? 'Opening Email...' : 'Submit Service Request'}
+            <button type="submit" className={`btn btn--primary btn--full${status === 'sending' ? ' btn--loading' : ''}`} disabled={status === 'sending' || status === 'sent'}>
+              {status === 'sent' ? '✓ Request Submitted!' : status === 'sending' ? 'Sending...' : 'Submit Service Request'}
             </button>
             {status === 'sent' && (
-              <p className="form__success">Your request has been prepared. If your email client didn't open, call us at (678) 995-4632.</p>
+              <p className="form__success">✓ We received your request and will follow up shortly. For immediate help, call <a href="tel:6789954632">(678) 995-4632</a>.</p>
+            )}
+            {status === 'error' && (
+              <p className="form__error">Something went wrong. Please call us at <a href="tel:6789954632">(678) 995-4632</a> or email <a href="mailto:getstarted@westgaes.com">getstarted@westgaes.com</a>.</p>
             )}
           </form>
         </div>
