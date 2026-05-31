@@ -820,6 +820,19 @@ input, textarea {
   transition: color var(--transition);
 }
 .footer__bottom a:hover { color: var(--yellow); }
+.footer__credit {
+  text-align: center;
+  padding: 12px 24px;
+  border-top: 1px solid rgba(255,255,255,0.04);
+  font-size: 0.75rem;
+  color: var(--gray-4);
+  letter-spacing: 0.04em;
+}
+.footer__credit a {
+  color: var(--gray-3);
+  transition: color var(--transition);
+}
+.footer__credit a:hover { color: var(--yellow); }
 
 /* ─── RESPONSIVE ─────────────────────────────────────────────────────────── */
 @media (max-width: 1024px) {
