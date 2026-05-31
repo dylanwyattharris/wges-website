@@ -462,6 +462,9 @@ function Footer() {
             <a href="https://facebook.com/WestGAES" target="_blank" rel="noreferrer">Facebook</a>
           </p>
         </div>
+        <div className="footer__credit">
+          Built by <a href="https://www.dwglobalfl.com" target="_blank" rel="noreferrer">DW Global Management</a> · Orlando, Florida
+        </div>
       </div>
     </footer>
   );
