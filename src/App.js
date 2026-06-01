@@ -9,11 +9,7 @@ const SERVICES = [
     title: 'Hydraulic System Repair',
     desc: 'Full diagnosis and repair of hydraulic pumps, cylinders, hoses, and control valves. We restore operating pressure and eliminate leaks on excavators, loaders, and industrial presses.',
   },
-  {
-    icon: '🔧',
-    title: 'Drivetrain & Powertrain',
-    desc: 'Transmission rebuilds, differential overhauls, torque converter service, and driveshaft repairs on heavy construction and agricultural equipment.',
-  },
+
   {
     icon: '⚡',
     title: 'Electrical & Diagnostic',
