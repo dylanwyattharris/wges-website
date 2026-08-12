@@ -9,7 +9,6 @@ const SERVICES = [
     title: 'Hydraulic System Repair',
     desc: 'Full diagnosis and repair of hydraulic pumps, cylinders, hoses, and control valves. We restore operating pressure and eliminate leaks on excavators, loaders, and industrial presses.',
   },
-
   {
     icon: '⚡',
     title: 'Electrical & Diagnostic',
@@ -80,34 +79,32 @@ function Nav({ activeSection, onNav }) {
         <span className="topbar__tag">24/7 Emergency Service</span>
       </div>
       <nav className={`nav${scrolled ? ' nav--scrolled' : ''}`}>
-      <div className="nav__inner">
-        <button className="nav__logo" onClick={() => handleNav('home')}>
-          <img src="/logo-full.png" alt="West GA Equipment Solutions" />
-        </button>
-        <ul className={`nav__links${menuOpen ? ' nav__links--open' : ''}`}>
-          {links.map((l) => (
-            <li key={l}>
-              <button
-                className={`nav__link${activeSection === l ? ' nav__link--active' : ''}`}
-                onClick={() => handleNav(l)}
-              >
-                {l.charAt(0).toUpperCase() + l.slice(1)}
-              </button>
+        <div className="nav__inner">
+          <button className="nav__logo" onClick={() => handleNav('home')}>
+            <img src="/logo-full.png" alt="West GA Equipment Solutions" />
+          </button>
+          <ul className={`nav__links${menuOpen ? ' nav__links--open' : ''}`}>
+            {links.map((l) => (
+              <li key={l}>
+                <button
+                  className={`nav__link${activeSection === l ? ' nav__link--active' : ''}`}
+                  onClick={() => handleNav(l)}
+                >
+                  {l.charAt(0).toUpperCase() + l.slice(1)}
+                </button>
+              </li>
+            ))}
+            <li>
+              <a href="tel:6789954632" className="nav__cta">Call Now</a>
             </li>
-          ))}
-          <li>
-            <a href="tel:6789954632" className="nav__cta">
-              Call Now
-            </a>
-          </li>
-        </ul>
-        <button className="nav__hamburger" onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle menu">
-          <span className={menuOpen ? 'open' : ''}></span>
-          <span className={menuOpen ? 'open' : ''}></span>
-          <span className={menuOpen ? 'open' : ''}></span>
-        </button>
-      </div>
-    </nav>
+          </ul>
+          <button className="nav__hamburger" onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle menu">
+            <span className={menuOpen ? 'open' : ''}></span>
+            <span className={menuOpen ? 'open' : ''}></span>
+            <span className={menuOpen ? 'open' : ''}></span>
+          </button>
+        </div>
+      </nav>
     </>
   );
 }
@@ -119,32 +116,33 @@ function HeroSection() {
   return (
     <section id="home" className="hero">
       <div className="hero__bg">
-        <div className="hero__grid"></div>
-        <div className="hero__glow"></div>
+        <div className="hero__stripes"></div>
+        <div className="hero__overlay"></div>
+        <div className="hero__glow-orange"></div>
+        <div className="hero__glow-green"></div>
       </div>
       <div className={`hero__content${visible ? ' hero__content--visible' : ''}`}>
         <div className="hero__badge">
           <span className="hero__badge-dot"></span>
-          West Georgia & Eastern Alabama
+          Bowdon, GA · West Georgia & Eastern Alabama
         </div>
         <h1 className="hero__headline">
-          <span className="hero__headline-top">PRECISION</span>
-          <span className="hero__headline-main">MACHINERY</span>
-          <span className="hero__headline-sub">
-            <span className="hero__headline-accent">REPAIR</span>
-            {' '}& MAINTENANCE
+          <span className="hero__headline-top">INDUSTRIAL</span>
+          <span className="hero__headline-main">EQUIPMENT</span>
+          <span className="hero__headline-bottom">
+            <span className="hero__headline-accent">REPAIR</span> & MAINTENANCE
           </span>
         </h1>
         <p className="hero__desc">
-          Industrial-grade expertise for heavy equipment. We minimize downtime,
-          maximize performance, and mobilize 24/7 across the West Georgia region.
+          Heavy machinery specialists serving West Georgia and Eastern Alabama.
+          We minimize downtime, maximize performance, and respond 24/7.
         </p>
         <div className="hero__actions">
           <a href="tel:6789954632" className="btn btn--primary">
             <span>Call (678) 995-4632</span>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
           </a>
-          <a href="mailto:getstarted@westgaes.com" className="btn btn--outline">Request a Quote</a>
+          <a href="mailto:getstarted@westgaes.com" className="btn btn--outline">Get a Free Quote</a>
         </div>
         <div className="hero__stats">
           {STATS.map((s) => (
@@ -178,6 +176,7 @@ function ServiceCard({ icon, title, desc, index }) {
       className={`service-card${vis ? ' service-card--visible' : ''}`}
       style={{ transitionDelay: `${index * 80}ms` }}
     >
+      <div className="service-card__top-bar"></div>
       <div className="service-card__icon">{icon}</div>
       <h3 className="service-card__title">{title}</h3>
       <p className="service-card__desc">{desc}</p>
@@ -193,7 +192,7 @@ function ServicesSection() {
           <span className="section__label">What We Do</span>
           <h2 className="section__title">Full-Spectrum Equipment Services</h2>
           <p className="section__subtitle">
-            From emergency field repairs to scheduled maintenance programs — we have the
+            From emergency field repairs to full scheduled maintenance programs — we have the
             tools, certifications, and experience to keep your fleet running.
           </p>
         </div>
@@ -253,9 +252,8 @@ function AboutSection() {
             manufacturer tolerances on every repair.
           </p>
           <p>
-            Whether you need a fast field service call or a complete drivetrain rebuild in
-            our workshop, you'll get accurate diagnostics, transparent estimates, and work
-            done right the first time.
+            Whether you need a fast field service call or a complete rebuild in our workshop,
+            you'll get accurate diagnostics, transparent estimates, and work done right the first time.
           </p>
           <div className="about__badges">
             <div className="about__badge">
@@ -285,7 +283,7 @@ function ContactSection() {
     firstName: '', lastName: '', company: '', phone: '', email: '',
     machine: '', message: '', serviceDate: '',
   });
-  const [status, setStatus] = useState('idle'); // idle | sending | sent | error
+  const [status, setStatus] = useState('idle');
 
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
@@ -400,7 +398,7 @@ function ContactSection() {
             </div>
             <div className="form__group">
               <label>Machine Info (Make, Model, Serial #)</label>
-              <input name="machine" value={form.machine} onChange={handleChange} placeholder="e.g. Caterpillar 320D, S/N CAT00320..." />
+              <input name="machine" value={form.machine} onChange={handleChange} placeholder="e.g. Dogapillar E00, S/N DGP00E..." />
             </div>
             <div className="form__group">
               <label>Describe the Issue *</label>
@@ -413,7 +411,7 @@ function ContactSection() {
               <p className="form__success">✓ We received your request and will follow up shortly. For immediate help, call <a href="tel:6789954632">(678) 995-4632</a>.</p>
             )}
             {status === 'error' && (
-              <p className="form__error">Something went wrong. Please call us at <a href="tel:6789954632">(678) 995-4632</a> or email <a href="mailto:getstarted@westgaes.com">getstarted@westgaes.com</a>.</p>
+              <p className="form__error">Something went wrong. Please call <a href="tel:6789954632">(678) 995-4632</a> or email <a href="mailto:getstarted@westgaes.com">getstarted@westgaes.com</a>.</p>
             )}
           </form>
         </div>
@@ -430,14 +428,18 @@ function Footer() {
           <img src="/logo-full.png" alt="West GA Equipment Solutions" />
           <p>Heavy machinery repair and industrial equipment maintenance serving West Georgia and Eastern Alabama. Available 24/7.</p>
           <a href="https://facebook.com/WestGAES" target="_blank" rel="noreferrer" className="footer__social">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
             Facebook
           </a>
         </div>
         <div className="footer__links">
           <h4>Services</h4>
           <ul>
-            {SERVICES.map(s => <li key={s.title}><button onClick={() => document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' })}>{s.title}</button></li>)}
+            {SERVICES.map(s => (
+              <li key={s.title}>
+                <button onClick={() => document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' })}>{s.title}</button>
+              </li>
+            ))}
           </ul>
         </div>
         <div className="footer__contact">
